@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server"
+    "dev": "NODE_ENV=development node dev-server"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
