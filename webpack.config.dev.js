@@ -19,10 +19,15 @@ module.exports = {
         path: PATHS.build,
         filename: '[name].js'
     },
+    devtool: 'eval-source-map',
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
+
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)?$/,
                 use: [{
                     loader: 'babel-loader',
                 }],
@@ -34,7 +39,7 @@ module.exports = {
 
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Webpack demo'
+            template: 'src/index.ejs'
         })
     ]
 };
