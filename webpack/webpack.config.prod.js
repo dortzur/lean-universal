@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const PATHS = require('./paths');
+const StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -33,6 +34,10 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
+        new StatsPlugin('webpack.stats.json', {
+            source: false,
+            modules: false
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false,
