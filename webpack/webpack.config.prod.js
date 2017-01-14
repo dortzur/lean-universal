@@ -6,13 +6,14 @@ module.exports = {
     entry: {
         app: PATHS.src
     },
+    devtool: 'source-map',
     output: {
         path: PATHS.build,
-        filename: '[name].js',
+        filename: '[name]-[hash].js',
         publicPath: "/",
 
     },
-    devtool: 'source-map',
+
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -42,7 +43,8 @@ module.exports = {
             compressor: {
                 warnings: false,
                 screw_ie8: true
-            }
+            },
+            sourceMap:true
         }),
     ]
 };
