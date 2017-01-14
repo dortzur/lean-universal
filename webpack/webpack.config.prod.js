@@ -30,7 +30,7 @@ const clientConfig = Object.assign({}, sharedConfig, {
     output: {
         path: PATHS.build,
         filename: '[name]-[hash].js',
-        publicPath: "/",
+        publicPath: "/build",
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -51,7 +51,8 @@ const clientConfig = Object.assign({}, sharedConfig, {
         new HtmlWebpackPlugin({
             title:"Lean Universal",
             template: path.join(__dirname,'template.ejs'),
-            filename:"template.html"
+            filename:"template.html",
+            path:"build"
         })
     ]
 });
