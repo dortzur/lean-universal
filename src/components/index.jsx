@@ -3,10 +3,9 @@ import {render} from "react-dom";
 import configureStore from "../state/configure-store";
 import AppRouter from "./app-router";
 
-const store = configureStore();
-const root = document.createElement('div');
-document.body.appendChild(root);
-
+const root = document.querySelector('#app');
+const initialState = window.__reactTransmitPacket;
+const store = require(configureStore(initialState));
 render(
     <AppRouter store={store} history={store.history}/>
     , root);

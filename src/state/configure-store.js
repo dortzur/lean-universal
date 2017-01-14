@@ -9,7 +9,7 @@ import {browserHistory} from "react-router";
 import {routerMiddleware} from 'react-router-redux'
 
 const enhancer = compose(applyMiddleware(reduxThunk, routerMiddleware(browserHistory)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 export default function configureStore(initialState) {
     const store = createStore(rootReducer, initialState, enhancer);

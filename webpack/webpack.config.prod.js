@@ -1,19 +1,11 @@
+const path = require('path');
 const webpack = require('webpack');
 const PATHS = require('./paths');
 const StatsPlugin = require('stats-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = {
-    entry: {
-        app: PATHS.src
-    },
+const sharedConfig = {
     devtool: 'source-map',
-    output: {
-        path: PATHS.build,
-        filename: '[name]-[hash].js',
-        publicPath: "/",
-
-    },
-
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -28,8 +20,18 @@ module.exports = {
             }],
 
     },
+};
 
-
+const clientConfig = Object.assign({}, sharedConfig, {
+    name: "client",
+    entry: {
+        app: PATHS.src
+    },
+    output: {
+        path: PATHS.build,
+        filename: '[name]-[hash].js',
+        publicPath: "/",
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -44,7 +46,25 @@ module.exports = {
                 warnings: false,
                 screw_ie8: true
             },
-            sourceMap:true
+            sourceMap: true
         }),
     ]
-};
+});
+
+
+const serverConfig = Object.assign({}, sharedConfig, {
+    name: 'server',
+    externals: [nodeExternals()],
+    entry: [
+        path.resolve(__dirname,'server-entry.js')
+    ],
+    target:'node',
+    output: {
+        path: PATHS.build,
+        filename: 'server.js',
+        publicPath: "/",
+        libraryTarget: 'commonjs2',
+    },
+});
+
+module.exports = [serverConfig, clientConfig];
