@@ -39,7 +39,7 @@ module.exports = {
 
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname,'index.ejs')
+            template: path.join(__dirname,'..','src','index.ejs')
         })
     ]
 };
