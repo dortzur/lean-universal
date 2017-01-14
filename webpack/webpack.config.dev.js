@@ -40,7 +40,7 @@ module.exports = {
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             title:"Lean Universal",
-            template: path.join(__dirname,'index.dev.ejs')
+            template: path.join(__dirname,'template.ejs')
         })
     ]
 };

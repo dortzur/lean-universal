@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const PATHS = require('./paths');
 const StatsPlugin = require('stats-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const sharedConfig = {
     devtool: 'source-map',
     resolve: {
@@ -48,6 +48,11 @@ const clientConfig = Object.assign({}, sharedConfig, {
             },
             sourceMap: true
         }),
+        new HtmlWebpackPlugin({
+            title:"Lean Universal",
+            template: path.join(__dirname,'template.ejs'),
+            filename:"template.html"
+        })
     ]
 });
 
@@ -56,12 +61,12 @@ const serverConfig = Object.assign({}, sharedConfig, {
     name: 'server',
     externals: [nodeExternals()],
     entry: [
-        path.resolve(__dirname,'server-entry.js')
+        path.resolve(__dirname,"..","src","server",'server-renderer.js')
     ],
     target:'node',
     output: {
         path: PATHS.build,
-        filename: 'server.js',
+        filename: 'server-renderer.js',
         publicPath: "/",
         libraryTarget: 'commonjs2',
     },
