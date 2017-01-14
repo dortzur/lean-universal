@@ -10,14 +10,17 @@ module.exports = {
     devServer: {
         publicPath: "/", // Same as `output.publicPath` in most cases.
         inline: true,
-        hot: true
+        hot: true,
+        historyApiFallback: true,
     },
     entry: {
         app: PATHS.src
     },
     output: {
         path: PATHS.build,
-        filename: '[name].js'
+        filename: '[name].js',
+        publicPath: "/",
+
     },
     devtool: 'eval-source-map',
     resolve: {
