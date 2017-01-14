@@ -1,12 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const webpack = require('webpack');
 const PATHS = {
     src: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'build')
 };
 
 module.exports = {
+    devServer: {
+        publicPath: "/", // Same as `output.publicPath` in most cases.
+        inline: true,
+        hot: true
+    },
     entry: {
         app: PATHS.src
     },
@@ -14,20 +19,20 @@ module.exports = {
         path: PATHS.build,
         filename: '[name].js'
     },
-    module:{
+    module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 use: [{
                     loader: 'babel-loader',
                 }],
-                exclude:/node_modules/
+                exclude: /node_modules/
             }],
 
     },
 
 
-    plugins: [
+    plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             title: 'Webpack demo'
         })
