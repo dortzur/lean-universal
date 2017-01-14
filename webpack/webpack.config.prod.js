@@ -62,7 +62,7 @@ const serverConfig = Object.assign({}, sharedConfig, {
     name: 'server',
     externals: [nodeExternals()],
     entry: [
-        path.resolve(__dirname,"..","src","server",'server-renderer.js')
+        path.resolve(__dirname,'server-renderer.js')
     ],
     target:'node',
     output: {

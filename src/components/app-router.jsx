@@ -10,10 +10,11 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import {browserHistory} from "react-router";
 //
 
-export const routes = <Route path="/" component={App}>
+export const routes = (<Route path="/" component={App}>
     <IndexRoute component={Home}/>
     <Route path="/page/:id" component={Page}/>
-</Route>;
+</Route>);
+
 class AppRouter extends React.Component {
     static propTypes = {
         store: PropTypes.object.isRequired
@@ -28,14 +29,11 @@ class AppRouter extends React.Component {
         const {store}=this.props;
         return (
             <Provider store={store}>
-                <Router history={this.history}>
-                    {routes}
-                </Router>
+                <Router history={this.history} routes={routes}/>
             </Provider>
         );
 
     }
 
 }
-;
 export default AppRouter;
