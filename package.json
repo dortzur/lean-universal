@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js"
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config.dev.js"
   },
   "babel": {
     "presets": [
