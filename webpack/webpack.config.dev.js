@@ -27,6 +27,11 @@ module.exports = {
 
         rules: [
             {
+                test: /\.(scss|css)$/,
+                loaders: ["style-loader", "css-loader?sourceMap&modules&camelCase&localIdentName=[local]--[hash:base64:5]", "sass-loader?sourceMap"]
+            },
+
+            {
                 test: /\.(js|jsx)?$/,
                 use: [{
                     loader: 'babel-loader',
@@ -39,8 +44,8 @@ module.exports = {
 
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            title:"Lean Universal",
-            template: path.join(__dirname,'template.ejs')
+            title: "Lean Universal",
+            template: path.join(__dirname, 'template.ejs')
         })
     ]
 };
