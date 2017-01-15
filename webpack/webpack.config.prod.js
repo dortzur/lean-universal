@@ -4,26 +4,13 @@ const PATHS = require('./paths');
 const StatsPlugin = require('stats-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 const sharedConfig = {
     devtool: 'source-map',
     resolve: {
         extensions: ['.js', '.jsx']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)?$/,
-                use: [{
-                    loader: 'babel-loader',
-                }],
-                exclude: /node_modules/
-            }, {
-                test: /\.(scss|css)$/,
-                use: ["style-loader", "css-loader?sourceMap&modules&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"]
-            },
-        ],
-
-    },
+    }
 };
 
 const clientConfig = Object.assign({}, sharedConfig, {
@@ -36,7 +23,23 @@ const clientConfig = Object.assign({}, sharedConfig, {
         filename: '[name]-[hash].js',
         publicPath: "/build",
     },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)?$/,
+                use: [{
+                    loader: 'babel-loader',
+                }],
+                exclude: /node_modules/
+            }, {
+                test: /\.(scss|css)$/,
+                loader: ExtractTextPlugin.extract(["css-loader?sourceMap&modules&minimize&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"])
+            },
+        ],
+
+    },
     plugins: [
+        new ExtractTextPlugin('[name]-[hash].css'),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
@@ -68,6 +71,23 @@ const serverConfig = Object.assign({}, sharedConfig, {
     entry: [
         path.resolve(__dirname, 'server-renderer.js')
     ],
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)?$/,
+                use: [{
+                    loader: 'babel-loader',
+                }],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(scss|css)$/,
+                loader:'ignore-loader'
+            }
+        ],
+
+    },
+    plugins: [new ExtractTextPlugin({disable: true})],
     target: 'node',
     output: {
         path: PATHS.build,

@@ -8,6 +8,7 @@ const file = fs.readFileSync("./build/template.html", "utf8");
 import {match, RouterContext} from 'react-router'
 import serialize from "serialize-javascript";
 import {Provider} from "react-redux";
+
 function handleRender(req, res, next) {
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         const store = configureStore({app: {initialized: true}});
