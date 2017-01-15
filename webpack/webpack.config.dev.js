@@ -26,9 +26,24 @@ module.exports = {
     module: {
 
         rules: [
+            // {
+            //     exclude: [
+            //         /\.html$/,
+            //         /\.(js|jsx)$/,
+            //         /\.css$/,
+            //         /\.json$/,
+            //         /\.svg$/
+            //     ],
+            //     loader: 'url-loader',
+            //     query: {
+            //         limit: 10000,
+            //         name: 'static/media/[name].[hash:8].[ext]'
+            //     }
+            // },
+
             {
                 test: /\.(scss|css)$/,
-                loaders: ["style-loader", "css-loader?sourceMap&modules&camelCase&localIdentName=[local]--[hash:base64:5]", "sass-loader?sourceMap"]
+                use: ["style-loader", "css-loader?sourceMap&modules&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]",'postcss-loader?sourceMap' ,"sass-loader?sourceMap"]
             },
 
             {
