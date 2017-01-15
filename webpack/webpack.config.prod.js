@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const PATHS = require('./paths');
 const StatsPlugin = require('stats-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const sharedConfig = {
     devtool: 'source-map',
     resolve: {
@@ -17,7 +17,11 @@ const sharedConfig = {
                     loader: 'babel-loader',
                 }],
                 exclude: /node_modules/
-            }],
+            }, {
+                test: /\.(scss|css)$/,
+                use: ["style-loader", "css-loader?sourceMap&modules&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"]
+            },
+        ],
 
     },
 };
@@ -49,10 +53,10 @@ const clientConfig = Object.assign({}, sharedConfig, {
             sourceMap: true
         }),
         new HtmlWebpackPlugin({
-            title:"Lean Universal",
-            template: path.join(__dirname,'template.ejs'),
-            filename:"template.html",
-            path:"build"
+            title: "Lean Universal",
+            template: path.join(__dirname, 'template.ejs'),
+            filename: "template.html",
+            path: "build"
         })
     ]
 });
@@ -62,9 +66,9 @@ const serverConfig = Object.assign({}, sharedConfig, {
     name: 'server',
     externals: [nodeExternals()],
     entry: [
-        path.resolve(__dirname,'server-renderer.js')
+        path.resolve(__dirname, 'server-renderer.js')
     ],
-    target:'node',
+    target: 'node',
     output: {
         path: PATHS.build,
         filename: 'server-renderer.js',

@@ -43,9 +43,8 @@ module.exports = {
 
             {
                 test: /\.(scss|css)$/,
-                use: ["style-loader", "css-loader?sourceMap&modules&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]",'postcss-loader?sourceMap' ,"sass-loader?sourceMap"]
+                use: ["style-loader", "css-loader?sourceMap&modules&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"]
             },
-
             {
                 test: /\.(js|jsx)?$/,
                 use: [{
@@ -55,7 +54,6 @@ module.exports = {
             }],
 
     },
-
 
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
