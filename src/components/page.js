@@ -2,17 +2,12 @@ import React from "react";
 
 
 class Page extends React.Component {
-    static loadProps(params, cb) {
-        console.log(params, "YO");
-        setTimeout(() => {
-            console.log(params, "YOYO");
-            cb(null, {tacos: Math.pow(10, 17) * Math.random()})
-        }, 1000)
-    }
-
-    renderLoading() {
-
-        return <div>LOADING...</div>
+    static async loadProps(params) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({tacos: Math.pow(10, 17) * Math.random()})
+            }, 1000);
+        });
     }
 
     render() {
