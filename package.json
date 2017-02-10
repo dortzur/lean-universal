@@ -1,7 +1,6 @@
 {
   "name": "lean-universal",
   "version": "0.2.0",
-  "private": true,
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.config.dev.js",
     "build": "rimraf dist && rimraf build && cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js --progress --profile --colors",
