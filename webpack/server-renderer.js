@@ -8,7 +8,7 @@ const file = fs.readFileSync("./build/template.html", "utf8");
 import {match} from 'react-router'
 import serialize from "serialize-javascript";
 import {Provider} from "react-redux";
-import AsyncProps, {loadPropsOnServer} from '@dortzur/async-props';
+import AsyncProps, {loadPropsOnServer} from 'async-props-promise';
 function handleRender(req, res, next) {
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {

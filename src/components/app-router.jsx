@@ -3,7 +3,7 @@ import React, {PropTypes, Component} from "react";
 import App from "./app";
 import Page from "./page";
 import Home from "./home";
-import AsyncProps from "@dortzur/async-props";
+import AsyncProps from "async-props-promise";
 import {Router, Route, IndexRoute} from 'react-router'
 import {Provider} from 'react-redux'
 import {syncHistoryWithStore} from 'react-router-redux'
