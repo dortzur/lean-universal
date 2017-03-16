@@ -8,13 +8,20 @@ import {Router, Route, IndexRoute} from 'react-router'
 import {Provider} from 'react-redux'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {browserHistory} from "react-router";
-//
+import {ReduxAsyncConnect} from 'redux-connect';
+import {initialize} from '../state/modules/app-module';
+import {connect} from 'react-redux';
+
 
 export const routes = (<Route path="/" component={App}>
     <IndexRoute component={Home}/>
     <Route path="/page/:id" component={Page}/>
 </Route>);
 
+@connect(() => ({}), (dispatch) => ({
+        init:()=> dispatch(initialize())
+    })
+)
 class AppRouter extends React.Component {
     static propTypes = {
         store: PropTypes.object.isRequired
@@ -25,11 +32,15 @@ class AppRouter extends React.Component {
         this.history = syncHistoryWithStore(browserHistory, props.store);
     }
 
+    componentDidMount() {
+        this.props.init();
+    }
+
     render() {
         const {store}=this.props;
         return (
             <Provider store={store}>
-                <Router history={this.history} routes={routes}/>
+                <Router history={this.history} routes={routes} render={(props) => <ReduxAsyncConnect {...props}/>}/>
             </Provider>
         );
 
