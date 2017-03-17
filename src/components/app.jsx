@@ -20,5 +20,5 @@ class App extends React.Component {
     }
 
 }
-
+var baba=12;
 export default App;

@@ -51,7 +51,10 @@ module.exports = {
                     loader: 'babel-loader',
                 }],
                 exclude: /node_modules/
-            }],
+            },
+            {test: /\.jpe?g$|\.gif$|\.png$/i, loader: "file-loader"},
+            {                test: /\.(eot|svg|ttf|woff|woff2)$/,loader:"file-loader"}
+        ],
 
     },
 

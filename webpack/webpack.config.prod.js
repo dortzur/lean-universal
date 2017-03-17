@@ -33,8 +33,9 @@ const clientConfig = Object.assign({}, sharedConfig, {
                 exclude: /node_modules/
             }, {
                 test: /\.(scss|css)$/,
-                loader: ExtractTextPlugin.extract(["css-loader?sourceMap&modules&minimize&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"])
-            },
+                loader: ExtractTextPlugin.extract(["css-loader?sourceMap&modules&minimize&url=false&camelCase&importLoaders=2&localIdentName=[local]--[hash:base64:5]", 'postcss-loader?sourceMap', "sass-loader?sourceMap"])
+            }, {test: /\.jpe?g$|\.gif$|\.png$/i, loader: "file-loader"},
+            {test: /\.(eot|svg|ttf|woff|woff2)$/, loader: "file-loader"},
         ],
 
     },
@@ -82,7 +83,7 @@ const serverConfig = Object.assign({}, sharedConfig, {
             },
             {
                 test: /\.(scss|css)$/,
-                loader:'ignore-loader'
+                loader: 'ignore-loader'
             }
         ],
 
@@ -97,4 +98,4 @@ const serverConfig = Object.assign({}, sharedConfig, {
     },
 });
 
-module.exports = [serverConfig, clientConfig];
+module.exports = [serverConfig ,clientConfig];

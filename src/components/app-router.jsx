@@ -13,6 +13,7 @@ import {initialize} from '../state/modules/app-module';
 import {connect} from 'react-redux';
 
 
+
 export const routes = (<Route path="/" component={App}>
     <IndexRoute component={Home}/>
     <Route path="/page/:id" component={Page}/>
